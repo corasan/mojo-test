@@ -5,6 +5,8 @@ export default function (state = initialState, action: any) {
   switch (type) {
     case 'POLL_DATA':
       return { ...state, pollData: payload }
+    case 'POLL_STATS':
+      return { ...state, pollStats: payload }
     case 'NOTIFICATION_SHOWN':
       return { ...state, notificationShown: payload }
     default:

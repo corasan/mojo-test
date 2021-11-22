@@ -1,6 +1,10 @@
 const initialState = {
   notificationShown: false,
-  pollData: []
+  pollData: [],
+  pollStats: {
+    answer_stats: null,
+    response_count: 0,
+  },
 }
 
 export default initialState
