@@ -40,8 +40,9 @@ const Notification = ({ description, shown, onClose, onOpen }: NotificationProps
       <View style={styles.notification}>
         <Text style={styles.description}>
           {description}
+          {'  '}
           <TouchableOpacity onPress={onOpen} accessibilityLabel="Open Mojo's daily poll">
-            <Text style={styles.open}> Open</Text>
+            <Text style={styles.open}>Open</Text>
           </TouchableOpacity>
         </Text>
         <TouchableOpacity
