@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     paddingTop: 32,
-    fontFamily: 'Futura',
   },
   poll: {
     paddingTop: 32,
