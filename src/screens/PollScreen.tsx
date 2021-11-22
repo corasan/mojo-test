@@ -52,7 +52,10 @@ export default function PollScreen() {
               {responseCount()} responses
             </Text>
           )}
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={goBack}
+            accessibilityLabel="Dismiss poll without an answer"
+          >
             <Text style={{ textDecorationLine: 'underline', fontSize: 16 }}>
               I don’t want to answer
             </Text>

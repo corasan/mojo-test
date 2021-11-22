@@ -2,7 +2,11 @@ import React from 'react'
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 const PollButton = ({ title = 'Title', percentage, onPress }: PollButtonProps) => (
-  <TouchableOpacity style={styles.container} onPress={onPress}>
+  <TouchableOpacity
+    style={styles.container}
+    onPress={onPress}
+    accessibilityLabel={`Poll option ${title}`}
+  >
     <Text style={styles.text}>{title}</Text>
     {percentage && <Text style={styles.text}>{percentage}%</Text>}
   </TouchableOpacity>
