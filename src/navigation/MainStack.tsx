@@ -9,13 +9,7 @@ import BottomTabStack from './BottomTabStack'
 
 export type MainStackParamsList = {
   Home: object | undefined
-  Poll: {
-    data: PollItem[]
-  }
-}
-export type PollItem = {
-  slug: string
-  text: string
+  Poll: object | undefined
 }
 export type MainStackNavigationProps = NativeStackNavigationProp<MainStackParamsList>
 

@@ -8,19 +8,25 @@ import Notification from '../components/Notification'
 import { MainStackNavigationProps } from '../navigation/MainStack'
 import UserSvg from '../../assets/svg/user.svg'
 import EditSvg from '../../assets/svg/edit.svg'
+import useAppSelector from '../hooks/useAppSelector'
+import useAppDispatch from '../hooks/useAppDispatch'
 
 export default function HomeScreen() {
   const { top } = useSafeAreaInsets()
-  const [notificationShown, setNotificationShown] = useState(false)
   const { navigate } = useNavigation<MainStackNavigationProps>()
-  const [data, setData] = useState([])
+  const { notificationShown } = useAppSelector(state => state)
+  const dispatch = useAppDispatch()
+
+  const setNotificationShown = (payload: boolean) => {
+    dispatch({ type: 'NOTIFICATION_SHOWN', payload })
+  }
 
   const loadData = async () => {
     try {
       const res = await fetch('https://api.jsonbin.io/b/619254c40ddbee6f8b0bc2af')
       const result = await res.json()
       if (result) {
-        setData(result?.answers_options)
+        dispatch({ type: 'POLL_DATA', payload: result?.answers_options })
         setNotificationShown(true)
       }
     } catch (err) {
@@ -33,7 +39,7 @@ export default function HomeScreen() {
   }, [])
 
   const onOpen = () => {
-    navigate('Poll', { data })
+    navigate('Poll')
   }
 
   return (

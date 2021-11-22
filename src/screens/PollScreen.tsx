@@ -1,13 +1,13 @@
 import React from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-import { useRoute, RouteProp, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import CloseSvg from '../../assets/svg/x.svg'
 import PollButton from '../components/PollButton'
-import { MainStackParamsList } from '../navigation/MainStack'
+import useAppSelector from '../hooks/useAppSelector'
 
 export default function PollScreen() {
-  const { params } = useRoute<RouteProp<MainStackParamsList, 'Poll'>>()
   const { goBack } = useNavigation()
+  const pollData = useAppSelector(state => state.pollData)
 
   return (
     <View style={styles.container}>
@@ -17,7 +17,7 @@ export default function PollScreen() {
       <Text style={styles.heading}>How often do you watch porn while masturbating?</Text>
 
       <View style={styles.poll}>
-        {params?.data.map(el => (
+        {pollData?.map((el: { text: string }) => (
           <PollButton title={el.text} />
         ))}
 

@@ -1,5 +1,6 @@
 const initialState = {
-  notificationShown: false
+  notificationShown: false,
+  pollData: []
 }
 
 export default initialState
