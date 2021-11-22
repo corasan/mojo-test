@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Text, View, StyleSheet, StatusBar } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import * as Progress from 'react-native-progress'
 import TextBubble from '../components/TextBubble'
+import Notification from '../components/Notification'
+import { MainStackNavigationProps } from '../navigation/MainStack'
 import UserSvg from '../../assets/svg/user.svg'
 import EditSvg from '../../assets/svg/edit.svg'
 
 export default function HomeScreen() {
   const { top } = useSafeAreaInsets()
+  const [notificationShown, setNotificationShown] = useState(false)
+  const { navigate } = useNavigation<MainStackNavigationProps>()
   const [data, setData] = useState([])
 
   const loadData = async () => {
@@ -16,6 +21,7 @@ export default function HomeScreen() {
       const result = await res.json()
       if (result) {
         setData(result?.answers_options)
+        setNotificationShown(true)
       }
     } catch (err) {
       console.log(err)
@@ -25,6 +31,10 @@ export default function HomeScreen() {
   useEffect(() => {
     loadData()
   }, [])
+
+  const onOpen = () => {
+    navigate('Poll', { data })
+  }
 
   return (
     <View style={styles.container}>
@@ -65,6 +75,13 @@ export default function HomeScreen() {
           Create positive views of your erections
         </TextBubble>
       </View>
+
+      <Notification
+        description="Mojo’s daily poll 📅"
+        shown={notificationShown}
+        onClose={() => setNotificationShown(false)}
+        onOpen={onOpen}
+      />
     </View>
   )
 }
